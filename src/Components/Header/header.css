@@ -1,0 +1,12 @@
+nav li, nav a{
+    color:#fff !important;
+}
+
+.nav-list, .nav-list ul{
+    display:flex;
+    flex-direction: row;
+}
+li{
+    list-style:none;
+    padding:0 10px;
+}
