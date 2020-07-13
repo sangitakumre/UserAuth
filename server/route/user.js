@@ -8,12 +8,16 @@ const Usercontroller = require('../controller/user')
 const { validateBody, schemas } = require('../validate/validate')
 const passportSignIn = passport.authenticate('local', {session:false})
 const passportJWT = passport.authenticate('jwt', {session:false})
+const passportGoogle = passport.authenticate('googleToken', { session: false })
 
 router.route('/signup')
   .post(validateBody(schemas.authSchema), Usercontroller.signUp);
 
 router.route('/signin')
   .post(validateBody(schemas.authSchema), passportSignIn, Usercontroller.signIn);
+
+  router.route('/oauth/google')
+  .post(passportGoogle, Usercontroller.googleOuth);
 
 router.route('/secrets')
   .get(passportJWT, Usercontroller.secrets);

@@ -2,11 +2,15 @@ const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 //database connection 
 mongoose.connect('mongodb://localhost/UserAuth');
 
 const app = express();
+
+//for cross port checking
+app.use(cors());
 
 //middelware
 app.use(logger('dev'));

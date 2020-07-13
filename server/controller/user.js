@@ -20,13 +20,19 @@ module.exports = {
         const { email, password } = req.body 
 
         //check email is already in use or not- here also put just email ES6
-        const foundUser = await User.findOne({ email }) // await - take few second 
+        const foundUser = await User.findOne({ "local.email": email }) // await - take few second 
         if(foundUser){
             return res.status(403).json({ error: 'Email already in use' })
         }
         
         // check db fields with input fields both are same so write single fields-ES6
-        const newUser = new User({ email, password })
+        const newUser = new User({ 
+            method: 'local',
+            local: {
+                email:email, 
+                password:password 
+            }
+        });
 
         //after match both fields save data to the database - (await- data takes time for save)
         await newUser.save();
@@ -47,6 +53,12 @@ module.exports = {
         res.status(200).json({ token });       
         //console.log('req.user', req.user)
         //console.log('successful login')
+    },
+
+    googleOuth: async(req,res,next) => {
+        console.log("req.user", req.user)
+        const token = signToken( req.user )
+        res.status(200).json({ token })
     },
 
     secrets: async(req, res, next) =>{
