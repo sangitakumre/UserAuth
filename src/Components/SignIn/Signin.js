@@ -7,7 +7,7 @@ import GoogleLogin from 'react-google-login'
 import * as actions from '../../Redux/Auth/AuthAction'
 import CustomInput from '../customInputs'
 
-class SignUp extends Component{
+class SignIn extends Component{
     constructor(props){
         super(props)
         this.onSubmit = this.onSubmit.bind(this)
@@ -15,14 +15,11 @@ class SignUp extends Component{
     }
 
     async onSubmit(formData){
-      console.log("onsubmit button")
-      console.log("formData", formData)
-
       //use actions function- props use bcz take data from another component
-      await this.props.signUpAction(formData)
+      await this.props.signInAction(formData)
 
       //redirect to dashboard using normal signup
-      if(!this.props.errorMessage) {
+      if(!this.props.errorMessage){
           this.props.history.push('/dashboard')
       }
     }
@@ -34,10 +31,10 @@ class SignUp extends Component{
 
         //redirect to dashboard using googleplus
       if(!this.props.errorMessage){
-            this.props.history.push('/dashboard')
-        }
+        this.props.history.push('/dashboard')
     }
-
+    }
+    
     render(){
         const { handleSubmit } = this.props
         return(
@@ -64,7 +61,7 @@ class SignUp extends Component{
                         { this.props.errorMessage ? 
                         <div className="alert alert-danger">{this.props.errorMessage}</div> : null }
 
-                        <button type="submit" className="btn btn-primary">SignUp</button>
+                        <button type="submit" className="btn btn-primary">SignIn</button>
                     </form>
                 </div>
                 <div className="col-md-6 col-lg-6 col-xs-12">
@@ -76,8 +73,8 @@ class SignUp extends Component{
                         <GoogleLogin
                             clientId="546256481688-21pkfu7ee5ud8k7eu976dmvi9hcbp6bh.apps.googleusercontent.com"
                             buttonText="Google"
-                            onSuccess={ this.responseGoogle }
-                            onFailure={ this.responseGoogle } 
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle} 
                             className="btn btn-outline-danger"
                         />
                     </div>
@@ -96,8 +93,8 @@ class SignUp extends Component{
 
 export default compose(
     connect(mapStateToProps, actions),
-    reduxForm({ form:'signup'})
-)(SignUp)
+    reduxForm({ form:'signin'})
+)(SignIn)
 
 
 

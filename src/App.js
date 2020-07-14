@@ -8,6 +8,8 @@ import Home from './Components/Home/Home'
 import About from './Components/About/About'
 import Dashboard from './Components/Dashboard/Dashboard'
 import SignUp from './Components/SignUp/SignUp'
+import SignIn from '../src/Components/SignIn/Signin'
+import AuthGuard from '../src/Components/HOCc/AuthGuard'
 
 function App() {
   return (
@@ -16,8 +18,9 @@ function App() {
         <BrowserRouter>
           <Index>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/dashboard" component={Dashboard}/>
+            <Route exact path="/dashboard" component={AuthGuard(Dashboard)}/>
             <Route exact path="/about" component={About}/>
+            <Route exact path="/signin" component={SignIn}/>
             <Route exact path="/signup" component={SignUp}/>
           </Index>
         </BrowserRouter>

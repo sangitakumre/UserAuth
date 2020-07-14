@@ -1,4 +1,4 @@
-import { AUTH_SIGNUP, AUTH_SIGNOUT, AUTH_ERROR } from './AuthType'
+import { AUTH_SIGNUP, AUTH_SIGNIN, AUTH_SIGNOUT, AUTH_ERROR } from './AuthType'
 
 const initialState ={
     isAuthenticated: false,
@@ -14,7 +14,15 @@ export const AuthReducer = (state = initialState, action) =>{
                 ...state,
                 token: action.payload,
                 isAuthenticated: true,
-                errorMessage:''
+                errorMessage: ''
+            }
+        case AUTH_SIGNIN:
+            console.log('auth sighin called')
+            return{
+                ...state,
+                token: action.payload,
+                isAuthenticated: true,
+                errorMessage: ''
             }
         case AUTH_SIGNOUT:
                 return{

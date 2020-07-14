@@ -63,6 +63,6 @@ module.exports = {
 
     secrets: async(req, res, next) =>{
         console.log('managed all token')
-        res.json({message:'send '})
+        res.json({message:'resource key '})
     }
 }
